@@ -8,9 +8,10 @@ interface QrCodeReaderProps {}
  */
 
 const QrCodeReader: React.FC<QrCodeReaderProps> = () => {
-  const [state, setstate] = useState<string>("");
+  const [state, setstate] = useState<any>();
+  const [error, seterror] = useState<string>("");
   const handleError = (error: any) => {
-    console.error(error);
+    seterror(error);
   };
   const handleScan = (data: any) => {
     setstate(data);
@@ -20,6 +21,7 @@ const QrCodeReader: React.FC<QrCodeReaderProps> = () => {
       <div className="row">
         <i>Escanea el código QR de la factura</i>
         {state}
+        {JSON.stringify(error)}
         <div className="col-12">
           <QrReader
             delay={300}
