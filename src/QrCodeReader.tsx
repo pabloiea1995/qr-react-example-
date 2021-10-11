@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import QrReader from "react-qr-reader";
 
 interface QrCodeReaderProps {}
@@ -6,20 +6,22 @@ interface QrCodeReaderProps {}
  * Component to scan a QR code from energy bills and send information to server with a sesion id
  * @param param0
  */
+
 const QrCodeReader: React.FC<QrCodeReaderProps> = () => {
+  const [state, setstate] = useState<string>("");
   const handleError = (error: any) => {
     console.error(error);
   };
   const handleScan = (data: any) => {
-    console.log(data);
+    setstate(data);
   };
   return (
     <div className="container">
       <div className="row">
         <i>Escanea el código QR de la factura</i>
+        {state}
         <div className="col-12">
           <QrReader
-            legacyMode
             delay={300}
             onError={handleError}
             onScan={handleScan}
